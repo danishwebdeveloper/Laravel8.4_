@@ -3,7 +3,6 @@
 @section('title', 'Login In')
 
 @section('content')
-    Hello There!!
-    Hello There!!
-    Hello There!!
+    Hello to Login !!
+   
 @endsection
