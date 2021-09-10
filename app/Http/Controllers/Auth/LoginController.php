@@ -26,7 +26,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -37,4 +38,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // Only on when you want to return username instead of email 
+    // Instead of email then you may override that funciton that never go to the AuthenticatesUsers page
+    
+    // public function username()
+    // {
+    //     return 'username';
+    // }
 }

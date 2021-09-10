@@ -19,7 +19,21 @@
             <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
             <a class="nav-link" href="{{ route('posts.create') }}">Add Blog</a>
             <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
-           
+            
+            {{--  guest and else  --}}
+            @guest
+                <a class="p-2 text-dark" href="{{ route('register') }}">Register</a>
+                <a class="p-2 text-dark" href="{{ route('login') }}">Login</a>   
+            @else
+            {{--  Logout method must be a POST request but a ref by default send GET request  --}}
+                <a class="p-2 text-dark" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                >Logout</a>
+
+                <form id="logout-form" action={{ route('logout') }} method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endguest
           </nav>
     </div>
     <div class="container">
