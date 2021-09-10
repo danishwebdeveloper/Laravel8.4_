@@ -35,7 +35,10 @@ use Illuminate\Support\Facades\Auth;
 
 // If handle through controller then we have to do like that
 Route::get('/', [HomeController::class, 'Home'])
-->name('home.index');
+->name('home.index')
+// Protected here but better way to protect it in controller
+// ->middleware('auth')
+;
 Route::get('/contact', [HomeController::class, 'Contact'])
 ->name('contact.index');
 

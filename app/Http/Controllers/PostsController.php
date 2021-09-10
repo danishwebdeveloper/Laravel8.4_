@@ -15,26 +15,11 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // private $posts = [
-    //     1 => [
-    //         'title' => 'Intro to Laravel',
-    //         'content' => 'This is a short intro to Laravel',
-    //         'is_new' => true,
-    //         'has_comment' => true
-    //     ],
-    //     2 => [
-    //         'title' => 'Intro to PHP',
-    //         'content' => 'This is a short intro to PHP',
-    //         'is_new' => false,
-           
-    //     ],
-    //     3 => [
-    //         'title' => 'Intro to GoLang',
-    //         'content' => 'This is a short intro to Golang',
-    //         'is_new' => false,
-           
-    //     ]
-    // ];
+    public function __construct()
+    {
+        // using only and except whatever you want
+        $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy']);
+    }
 
     public function index()
     {

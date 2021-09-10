@@ -28,7 +28,7 @@
             {{--  Logout method must be a POST request but a ref by default send GET request  --}}
                 <a class="p-2 text-dark" href="{{ route('logout') }}"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                >Logout</a>
+                >Logout ({{ Auth::user()->name }})</a>
 
                 <form id="logout-form" action={{ route('logout') }} method="POST" style="display: none;">
                     @csrf
