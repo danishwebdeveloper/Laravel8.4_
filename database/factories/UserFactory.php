@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -30,4 +31,6 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
         ];
     }
+    
+
 }
