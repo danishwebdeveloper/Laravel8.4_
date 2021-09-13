@@ -19,6 +19,8 @@
     {{--  @break($key = 2)  --}}
         {{--  @continue($key = 1)  --}}
         @if ($post->comment_count)
+        <b>Added</b> {{ $post->created_at->diffForHumans() }}
+        <b>By</b>    {{ $post->user->name }}
         <p>Comment on Post: {{ $post->comment_count }}</p>
         @else 
         <p>No Comment Yet!</p> 

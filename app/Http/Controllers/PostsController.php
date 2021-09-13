@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Storepost;
 use App\Models\BlogPost;
+// use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\DB;
 
@@ -97,7 +99,12 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        
+        $post = BlogPost::findOrFail($id);
+
+        //Made gate in AuthServiceProvider inside provider only allow regsitered user to edit or come to that page
+        if(Gate::denies('update-post', $post)){
+            abort(403, "You're not allow to allow edit this blogpost");
+        }
         return view('Posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
 
@@ -111,6 +118,12 @@ class PostsController extends Controller
     public function update(Storepost $request, $id)
     {
         $post = BlogPost::findOrFail($id);
+        
+        //Made gate in AuthServiceProvider inside provider only allow regsitered user to edit or come to that page
+        if(Gate::denies('update-post', $post)){
+            abort(403);
+        }
+
         $validated = $request->validated();
         $post->fill($validated);
         $post->save();
@@ -133,6 +146,12 @@ class PostsController extends Controller
         // dd($id);
 
         $post = BlogPost::findOrFail($id);
+
+        // For deletion 
+        if(Gate::denies('delete-post', $post)){
+            abort(403, "You're Not Allowed to Delete This Post!");
+        };
+
         $post->delete();
 
         session()->flash('status', $id . ' Number Blog Post is Deleted Successfully!');
