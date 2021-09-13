@@ -135,7 +135,7 @@ class PostsController extends Controller
         $post = BlogPost::findOrFail($id);
         $post->delete();
 
-        session()->flash('status', $id . ' Number Blog is Deleted');
+        session()->flash('status', $id . ' Number Blog Post is Deleted Successfully!');
         return redirect()->route('posts.index');
     }
 }

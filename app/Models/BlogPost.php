@@ -17,5 +17,14 @@ class BlogPost extends Model
     public function comment(){
         return $this->hasMany(Comment::class);
     }
+
+    // this function is only made to perfectly delete bcz of foreign key and has relation with some other tables
+    // So due to that it won;t possible to delete that event without this function bcz of foreign key relation.
+    public static function boot(){
+        parent::boot();
+        static::deleting(function(BlogPost $blogPost){
+            $blogPost->comment()->delete();
+        });
+    }
     
 } 
