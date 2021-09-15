@@ -36,8 +36,7 @@ class PostsController extends Controller
         // }
         // dd(DB::getQueryLog());
 
-        return view('Posts.index', 
-        ['posts'=> BlogPost::withCount('comment')->get()]
+        return view('Posts.index', ['posts'=> BlogPost::withCount('comment')->get()->sortDesc()]
     );
         
     }
@@ -57,6 +56,9 @@ class PostsController extends Controller
         // Storepost created inside the requests
         // Plus we also post-title and post->content into the BlogPost Model
         $validated = $request->validated();
+
+        // If Shows error of not user_id then use it as User()->current user
+        // $validated['user_id'] = $request->user()->id;
 
         // Section without the Mass Assignment (fillable)
         // $post = new BlogPost();

@@ -42,6 +42,11 @@ Route::get('/', [HomeController::class, 'Home'])
 Route::get('/contact', [HomeController::class, 'Contact'])
 ->name('contact.index');
 
+// For secret contact
+Route::get('/secret', [HomeController::class, 'Secret'])
+->name('secret.page')
+->middleware('can:home-secret'); //second name after can:'name of ability as we set during Gate'
+
 // For AUthentication
 Auth::routes();
 

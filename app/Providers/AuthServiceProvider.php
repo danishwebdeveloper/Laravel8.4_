@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //Make gate for specific user, that can edit the post that he posted. Now afte that go to controller
+        //Make gate for specific user, that can edit the post that he posted. Now after that go to controller
         Gate::define('update-post', function($user, $post){
             return $user->id == $post->user_id;
         });
@@ -35,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id == $post->user_id;
         });
 
+
         // Gate is for admin that run before above Gate define
         Gate::before(function($user, $ability){
             // we can even make it default and not set ability then they will do update & del access
@@ -43,5 +44,13 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+
+        // Gate for only admin can view some page and some links on same page that page is access to current user but
+        // the words we want to hide won't be display to the users.
+        Gate::define('home-secret', function($user){
+            return $user->is_admin;
+        });
+
     }
 }

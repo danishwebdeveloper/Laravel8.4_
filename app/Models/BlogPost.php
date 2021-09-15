@@ -11,7 +11,8 @@ class BlogPost extends Model
     // Created bcz we use it in the Post Controller and we can't define all these things at BlogPost Resource Controller..!!!
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        // 'user_id'
     ];
     
     public function comment(){
