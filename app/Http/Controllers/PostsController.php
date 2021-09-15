@@ -87,10 +87,15 @@ class PostsController extends Controller
         
         // return view('Posts.index', ['posts'=> $this->posts]);
 
-        return view('posts.show', 
-        ['post'=> BlogPost::with('comment')->findOrFail($id)]
-    
-    );
+        // Simple way to get comment
+        // return view('posts.show', 
+        // ['post'=> BlogPost::with('comment')->findOrFail($id)]);
+
+        // Way to get comment that latest comment come first
+        return view('posts.show', ['post' => BlogPost::with(['comment' => function($query){
+            return $query->orderBy('created_at', 'DESC');
+        }])->findOrFail($id)]);
+
     }
 
     /**
