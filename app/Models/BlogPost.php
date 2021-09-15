@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +31,11 @@ class BlogPost extends Model
         static::deleting(function(BlogPost $blogPost){
             $blogPost->comment()->delete();
         });
+    }
+
+    // For most commented post, using Local query builder , and comment_count is prebuilt if you just use withCount
+    public function scopemostCommented(Builder $query){
+        return $query->withCount('comment')->orderBy('comment_count', 'desc');
     }
     
 } 

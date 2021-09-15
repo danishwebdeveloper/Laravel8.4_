@@ -13,7 +13,8 @@
 
     {{--  It react same as if exist otheriw3se show no post found  --}}
     
-    
+  <div class="row">  
+      <div class="col-6">
     @forelse ($posts as $key => $post)
               {{-- @dump($post->comment_count);     --}}
     {{--  @break($key = 2)  --}}
@@ -31,5 +32,23 @@
     @empty
         No Post Yet!
     @endforelse
+</div>
 
+
+<div class="col-6">
+    <div class="card">
+        <div class="card-header">
+            Most Commented Posts!
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush"> 
+            @foreach ($mostCommented as $post)
+           <a href="{{ route('posts.show', ['post' => $post->id]) }}"> <li class="list-group-item">{{ $post->title }}</li> </a>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+</div>
+
+</div>
 @endsection

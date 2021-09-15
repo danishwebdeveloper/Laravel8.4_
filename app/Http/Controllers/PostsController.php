@@ -36,7 +36,11 @@ class PostsController extends Controller
         // }
         // dd(DB::getQueryLog());
 
-        return view('Posts.index', ['posts'=> BlogPost::withCount('comment')->get()->sortDesc()]
+        return view('Posts.index', 
+        [
+            'posts'=> BlogPost::withCount('comment')->get()->sortDesc(),
+            'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
+            ]
     );
         
     }
