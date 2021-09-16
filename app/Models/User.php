@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,19 @@ class User extends Authenticatable
     public function blogposts(){
         return $this->hasMany(BlogPost::class);
     }
+
+    
+    // For Most counted Person that comments & Posts (User fetch with blogposts function(relation) with BlogPosts)
+    // Alos use TINKER to verify about the fucntion WithMostBlogPosts, User::WithMostBlogPosts()->take(5)->get();
+    public function scopeWithMostBlogPosts(Builder $query){
+        return $query->withCount('blogposts')->orderBy('blogposts_count', 'desc');
+    }
+
+    // Most Active USers
+    // public function scopeWithMostBlogPostsLastMonths(Builder $query){
+    //     return $query->withCount(['blogposts' => function(Builder $query){
+    //         $query->whereBetween('created_at', [now()->subMonths(1), now()]);
+    //     }])->having('blogposts_count', '>=', 2)->orderBy('blogposts_count', 'DESC');
+    // }
+
 }

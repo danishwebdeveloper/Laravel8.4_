@@ -36,11 +36,14 @@
 
 
 <div class="col-6">
+<div class="container">
+<div class="row">
     <div class="card">
         <div class="card-header">
-            Most Commented Posts!
+            Most Commented Post!
         </div>
         <div class="card-body">
+            <h5 class="card-title">What People are talking about most!!</h5>
           <ul class="list-group list-group-flush"> 
             @foreach ($mostCommented as $post)
            <a href="{{ route('posts.show', ['post' => $post->id]) }}"> <li class="list-group-item">{{ $post->title }}</li> </a>
@@ -48,6 +51,24 @@
           </ul>
         </div>
       </div>
+     <div>
+
+    <div class="row mx-1 my-5">
+    <div class="card">
+        <div class="card-header">
+            Most Active User!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">The User Has Most Posts and Comments!</h5>
+          <ul class="list-group list-group-flush"> 
+            @foreach ($mostActiveUser as $user)
+           <a href="{{ route('posts.show', ['post' => $post->id]) }}"> <li class="list-group-item">{{ $user->name }}</li> </a>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+     <div>
+    <div>
 </div>
 
 </div>

@@ -33,9 +33,14 @@ class BlogPost extends Model
         });
     }
 
+
     // For most commented post, using Local query builder , and comment_count is prebuilt if you just use withCount
     public function scopemostCommented(Builder $query){
         return $query->withCount('comment')->orderBy('comment_count', 'desc');
     }
+
+
+
+
     
 } 
