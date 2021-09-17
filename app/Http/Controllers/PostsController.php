@@ -42,6 +42,7 @@ class PostsController extends Controller
             'posts'=> BlogPost::withCount('comment')->get()->sortDesc(),
             'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
             'mostActiveUser' => User::WithMostBlogPosts()->take(5)->get(),
+            'mostBlogPosts' => User::WithMostBlogPostsLastMonths()->take(3)->get(),
             ]
     );
         

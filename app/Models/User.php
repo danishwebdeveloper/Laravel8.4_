@@ -53,11 +53,11 @@ class User extends Authenticatable
         return $query->withCount('blogposts')->orderBy('blogposts_count', 'desc');
     }
 
-    // Most Active USers
-    // public function scopeWithMostBlogPostsLastMonths(Builder $query){
-    //     return $query->withCount(['blogposts' => function(Builder $query){
-    //         $query->whereBetween('created_at', [now()->subMonths(1), now()]);
-    //     }])->having('blogposts_count', '>=', 2)->orderBy('blogposts_count', 'DESC');
-    // }
+    // Most Blog Posts USers
+    public function scopeWithMostBlogPostsLastMonths(Builder $query){
+        return $query->withCount(['blogposts' => function(Builder $query){
+            $query->whereBetween('created_at', [now()->subMonths(1), now()]);
+        }])->has('blogposts', '>=', 2)->orderBy('blogposts_count', 'DESC');
+    }
 
 }

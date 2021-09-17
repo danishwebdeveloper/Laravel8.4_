@@ -15,6 +15,9 @@
         <div>The post is old, using else if</div>
     @endif
 
+    {{-- @if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 5)
+         
+    @endif --}}
 
     @unless ($post['is_new'])
           <div>Old post using unless, false should be shown</div>  
@@ -31,8 +34,20 @@
         {{-- @dd($comment) --}}
         {{ $comment->content }}, <b>Added</b> {{ $comment->created_at->diffForHumans() }}
     </p>
+    
     @empty
-        <p>No Comment Yet!</p>
+    {{-- We make Blade Component and use it using component and name of file --}}
+    {{-- @component('badge')
+        No Comment Yet!
+    @endcomponent --}}
+        @component('components.badge', ['type' => 'success'])
+        No Comment Yet!
+        @endcomponent
+    
+    {{-- As instead of using the component and component badge we declare all in AppAuthServices in boot function --}}
+    {{-- @badge()
+    No Comment Yet!
+    @endbadge --}}
     @endforelse
 </div>
 

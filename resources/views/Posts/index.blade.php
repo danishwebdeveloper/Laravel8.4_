@@ -51,10 +51,11 @@
           </ul>
         </div>
       </div>
+
      <div>
 
-    <div class="row mx-1 my-5">
-    <div class="card">
+  {{--  <div class="row mx-1 my-5">
+      <div class="card">
         <div class="card-header">
             Most Active User!
         </div>
@@ -66,10 +67,28 @@
             @endforeach
           </ul>
         </div>
-      </div>
-     <div>
-    <div>
-</div>
+      </div>  
+      <div> --}}    
+    {{--  <div>
+</div>  
+</div> --}}
 
-</div>
+        {{--  Using Components Blade  --}}
+        @component('components.card', ['title' => 'Most Active User!'])
+        @slot('subtitle')
+          Most Active User Till Now!!
+        @endslot  
+        @slot('items', collect($mostActiveUser)->pluck('name'))
+        @endcomponent
+
+        {{--  @foreach ($mostBlogPosts as $mostBlogPost)
+          {{ $mostBlogPost }}
+        @endforeach  --}}
+        
+        @component('components.card', ['title' => 'Most Blog Posts User!'])
+        @slot('subtitle')
+        Top 3 Blog Post Users!
+        @endslot  
+        @slot('items', collect($mostBlogPosts)->pluck('name'))
+        @endcomponent
 @endsection
