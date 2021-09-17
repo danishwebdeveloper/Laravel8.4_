@@ -11,10 +11,9 @@ class HomeTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertSeeText('HELLO');
-        
     }
 
-    // For contact testing always start with test
+    // test case always start with test
     public function test_forContact(){
        $contactresponse = $this->get('/contact');
        $contactresponse->assertSeeText('Page'); 

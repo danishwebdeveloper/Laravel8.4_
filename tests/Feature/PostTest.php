@@ -21,17 +21,17 @@ class PostTest extends TestCase
 
     public function testFactoryComments(){
         
-        // Arrange
+        // First step to Arrange
         $post = $this->createDummyBlogPost();
         Comment::factory()->count(4)->create(
             [
                 'blog_post_id' => $post->id,
             ]);
 
-        // Act
+        // Second Act on it
             $response = $this->get('/posts');
         
-        // Assert
+        // Third is to Assert
         $response->assertSeeText('Comment on Post: 4');
         
     }
