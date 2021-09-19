@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class BlogPost extends Model
 {
@@ -22,6 +23,11 @@ class BlogPost extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    // Many to Many Relation of BlogPosts and Tags
+    public function tags(){
+        $this->belongsToMany(tags::class);
     }
 
     // this function is only made to perfectly delete bcz of foreign key and has relation with some other tables

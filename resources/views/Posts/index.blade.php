@@ -21,7 +21,7 @@
         {{--  @continue($key = 1)  --}}
         @if ($post->comment_count)
         <b>Added</b> {{ $post->created_at->diffForHumans() }}
-        <b>By</b>    {{ $post->user->name }}
+        {{--  <b>By</b>    {{ $post->user->name }}  --}}
         <p>Comment on Post: {{ $post->comment_count }}</p>
         @else 
         <p>No Comment Yet!</p> 
@@ -29,6 +29,8 @@
         
         {{--  Using the partial template, And always inside the foreach loop --}}
         @include('Posts.Partials.post', [])
+        @include('comments._form')
+        
     @empty
         No Post Yet!
     @endforelse

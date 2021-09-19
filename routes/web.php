@@ -3,7 +3,9 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostCommentController as ControllersPostCommentController;
 use App\Http\Controllers\PostsController;
+use App\Models\PostCommentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +48,9 @@ Route::get('/contact', [HomeController::class, 'Contact'])
 Route::get('/secret', [HomeController::class, 'Secret'])
 ->name('secret.page')
 ->middleware('can:home-secret'); //second name after can:'name of ability as we set during Gate'
+
+// for post Commment Route
+Route::resource('posts.comments', ControllersPostCommentController::class)->only(['store' ,'edit']);
 
 // For AUthentication
 Auth::routes();

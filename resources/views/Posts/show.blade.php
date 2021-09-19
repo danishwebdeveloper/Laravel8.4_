@@ -8,6 +8,7 @@
     <h1>{{ $post->title}}</h1>
     <p>{{ $post->content }}</p>
     
+    
 
     @if ($post['is_new'])
         <div>The post is new, using If</div>
@@ -36,6 +37,7 @@
     </p>
     
     @empty
+    
     {{-- We make Blade Component and use it using component and name of file --}}
     {{-- @component('badge')
         No Comment Yet!
@@ -44,6 +46,10 @@
         No Comment Yet!
         @endcomponent
     
+    
+    @include('comments._form')
+    
+
     {{-- As instead of using the component and component badge we declare all in AppAuthServices in boot function --}}
     {{-- @badge()
     No Comment Yet!

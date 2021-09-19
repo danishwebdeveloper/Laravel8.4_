@@ -18,7 +18,12 @@
     </div>
 
         {{-- Combined error for all  --}}
-        @if ($errors->any())
+        @component('components.error')
+            
+         @endcomponent
+        
+         {{--  Remove these and use component  --}}
+         {{--  @if ($errors->any())
             <div class="mb-3">
                 <ul class="list-group">
                     @foreach ($errors->all() as $error)
@@ -26,5 +31,5 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+        @endif  --}}
 
