@@ -37,7 +37,7 @@ class PostsController extends Controller
         // }
         // dd(DB::getQueryLog());
 
-        return view('Posts.index', 
+        return view('Posts.index',
         [
             'posts'=> BlogPost::withCount('comment')->get()->sortDesc(),
             'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
@@ -45,7 +45,7 @@ class PostsController extends Controller
             'mostBlogPosts' => User::WithMostBlogPostsLastMonths()->take(3)->get(),
             ]
     );
-        
+
     }
 
     /**
@@ -76,6 +76,19 @@ class PostsController extends Controller
         // Use effecient method to do that using Mass Assignment Fillable
         $post = BlogPost::create($validated);
 
+        // For File Upload
+        $hasFile = $request->hasFile('thumbnail');
+        if($hasFile){
+            $file = $request->file('thumbnail');
+            dump($file);
+            dump($file->getClientMimeType());
+            dump($file->getClientOriginalExtension());
+            // $file->store('thumbnails');
+            // Instead of above we can also use storeAs to specify name of image
+            dump($file->storeAs('thumbnails', $post->id . '.' . $file->guessExtension()));
+            die();
+        }
+
         // Delaration but use it in the main layout.app
         $request->session()->flash('status', 'The Blog Post has Created Sussessfully!');
 
@@ -91,11 +104,11 @@ class PostsController extends Controller
     public function show($id)
     {
         // abort_if(!isset($this->posts[$id]), 404);
-        
+
         // return view('Posts.index', ['posts'=> $this->posts]);
 
         // Simple way to get comment
-        // return view('posts.show', 
+        // return view('posts.show',
         // ['post'=> BlogPost::with('comment')->findOrFail($id)]);
 
         // Way to get comment that latest comment come first
@@ -132,7 +145,7 @@ class PostsController extends Controller
     public function update(Storepost $request, $id)
     {
         $post = BlogPost::findOrFail($id);
-        
+
         //Made gate in AuthServiceProvider inside provider only allow regsitered user to edit or come to that page
         if(Gate::denies('update-post', $post)){
             abort(403);
@@ -161,7 +174,7 @@ class PostsController extends Controller
 
         $post = BlogPost::findOrFail($id);
 
-        // For deletion 
+        // For deletion
         if(Gate::denies('delete-post', $post)){
             abort(403, "You're Not Allowed to Delete This Post!");
         };

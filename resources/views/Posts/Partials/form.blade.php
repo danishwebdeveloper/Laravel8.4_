@@ -13,8 +13,13 @@
         @enderror
         
     <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <textarea name="content" class="form-control" placeholder="Please enter content">{{ old('content', optional($post ?? null)->content) }}</textarea>
+        <label >Content</label>
+        <textarea name="content" class="form-control" placeholder="Please enter your content...">{{ old('content', optional($post ?? null)->content) }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label >Thumbnail</label>
+        <input type="file" class="form-control-file" name="thumbnail"></textarea>
     </div>
 
         {{-- Combined error for all  --}}
