@@ -6,9 +6,15 @@
 @section('content')
 
     <h1>{{ $post->title}}</h1>
+
+     {{--  Show Image  --}}
+     @if($post->images)
+     <div style="min-height: 200px; color: white; text-align: center; background-attachment: fixed">
+     <img src="{{ Storage::url($post->images->path) }}" />
+</div>
+    @endif
+
     <p>{{ $post->content }}</p>
-    
-    
 
     @if ($post['is_new'])
         <div>The post is new, using If</div>
@@ -17,11 +23,11 @@
     @endif
 
     {{-- @if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 5)
-         
+
     @endif --}}
 
     @unless ($post['is_new'])
-          <div>Old post using unless, false should be shown</div>  
+          <div>Old post using unless, false should be shown</div>
     @endunless
 
     @isset($post['has_comment'])
@@ -35,9 +41,9 @@
         {{-- @dd($comment) --}}
         {{ $comment->content }}, <b>Added</b> {{ $comment->created_at->diffForHumans() }}
     </p>
-    
+
     @empty
-    
+
     {{-- We make Blade Component and use it using component and name of file --}}
     {{-- @component('badge')
         No Comment Yet!
@@ -45,10 +51,10 @@
         @component('components.badge', ['type' => 'success'])
         No Comment Yet!
         @endcomponent
-    
-    
+
+
     @include('comments._form')
-    
+
 
     {{-- As instead of using the component and component badge we declare all in AppAuthServices in boot function --}}
     {{-- @badge()

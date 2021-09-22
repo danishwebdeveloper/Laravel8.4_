@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Storepost;
 use App\Models\BlogPost;
+use App\Models\Images;
 use App\Models\User;
 // use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 // use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
@@ -77,16 +80,24 @@ class PostsController extends Controller
         $post = BlogPost::create($validated);
 
         // For File Upload
-        $hasFile = $request->hasFile('thumbnail');
-        if($hasFile){
-            $file = $request->file('thumbnail');
-            dump($file);
-            dump($file->getClientMimeType());
-            dump($file->getClientOriginalExtension());
+        if($request->hasFile('thumbnail')){
+            $path = $request->file('thumbnail')->store('thumbnails');
+            $post->images()->save(
+                Images::create(['path' => $path])
+            );
+            // dump($file);
+            // dump($file->getClientMimeType());
+            // dump($file->getClientOriginalExtension());
             // $file->store('thumbnails');
+            // Storage:: disk('local')->putFile('thumbnails', $file);
+
             // Instead of above we can also use storeAs to specify name of image
-            dump($file->storeAs('thumbnails', $post->id . '.' . $file->guessExtension()));
-            die();
+            // $name1 = dump($file->storeAs('thumbnails', $post->id . '.' . $file->guessExtension()));
+            // Storage::disk('local')->putFileAs('thumbnails', $file, $post->id . '.' . $file->guessExtension());
+
+            // Get URL and also do php artisan Storage:link -> make link to storage
+            // dump(Storage::url($name1));
+            // die();
         }
 
         // Delaration but use it in the main layout.app
@@ -153,6 +164,21 @@ class PostsController extends Controller
 
         $validated = $request->validated();
         $post->fill($validated);
+
+        // Update / Delete Existing File
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('thumbnails');
+            if ($post->images) {
+                Storage::delete($post->images->path);
+                $post->images->path = $path;
+                $post->images->save();
+            } else {
+                $post->images()->save(
+                    Images::create(['path' => $path])
+                );
+            }
+        }
+
         $post->save();
 
         // Now put some flash message and redirect
