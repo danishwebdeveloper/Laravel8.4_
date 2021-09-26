@@ -13,17 +13,17 @@
     <h4>Laravel 8 App</h4>
     </div>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white">
-       
+
         <nav class="nav">
             <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
             <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
             <a class="nav-link" href="{{ route('posts.create') }}">Add Blog</a>
             <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
-            
+
             {{--  guest and else  --}}
             @guest
                 <a class="p-2 text-dark" href="{{ route('register') }}">Register</a>
-                <a class="p-2 text-dark" href="{{ route('login') }}">Login</a>   
+                <a class="p-2 text-dark" href="{{ route('login') }}">Login</a>
             @else
             {{--  Logout method must be a POST request but a ref by default send GET request  --}}
                 <a class="p-2 text-dark" href="{{ route('logout') }}"
