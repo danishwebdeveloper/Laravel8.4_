@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Email;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostCommentController as ControllersPostCommentController;
 use App\Http\Controllers\PostsController;
@@ -63,6 +64,10 @@ Route::resource('posts', PostsController::class);
 // For specific which you need only
 // ->only(['index', 'show', 'create', 'store', 'edit', 'update']);
 
+// For Email
+Route::get('/email', [Email::class, 'index']);
+
+
 // Now Global declaration and use it using use($posts)
 $posts = [
     1 => [
@@ -75,16 +80,16 @@ $posts = [
         'title' => 'Intro to PHP',
         'content' => 'This is a short intro to PHP',
         'is_new' => false,
-       
+
     ],
     3 => [
         'title' => 'Intro to GoLang',
         'content' => 'This is a short intro to Golang',
         'is_new' => false,
-       
+
     ]
 ];
-  
+
 // Route::get('/posts', function() use($posts){
 //     return view('Posts.index', ['posts'=> $posts]);
 // });
