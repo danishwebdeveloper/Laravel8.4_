@@ -6,7 +6,7 @@ use App\Http\Requests\StoreComment;
 use App\Models\BlogPost;
 use App\Models\PostComment;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\Comment as CommentResource;
 class PostCommentController extends Controller
 {
     /**
@@ -24,7 +24,13 @@ class PostCommentController extends Controller
     {
         // Automatically converted into array and JSON
         // return $post->comment;
-        return $post->comment()->with('user')->get();
+
+        // More elequent Model Seralization(Only Work if we have make:resource Comment and declare all according to need)
+        // return new CommentResource($post->comment->first());
+        return CommentResource::collection($post->comment);
+
+        // Return JSON
+        // return $post->comment()->with('user')->get();
     }
 
     /**

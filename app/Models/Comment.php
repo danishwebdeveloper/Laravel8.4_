@@ -12,7 +12,7 @@ class Comment extends Model
     protected $fillable = ['user_id', 'content'];
 
     // Some field not display in JSON
-    protected $hidden = ['blog_post_id'];
+    protected $hidden = ['blog_post_id', 'user_id'];
 
 
     public function blogPost(){
