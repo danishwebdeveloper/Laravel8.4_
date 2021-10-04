@@ -51,7 +51,7 @@ Route::get('/secret', [HomeController::class, 'Secret'])
 ->middleware('can:home-secret'); //second name after can:'name of ability as we set during Gate'
 
 // for post Commment Route
-Route::resource('posts.comments', ControllersPostCommentController::class)->only(['store' ,'edit']);
+Route::resource('posts.comments', ControllersPostCommentController::class)->only(['store','edit','index']);
 
 // For AUthentication
 Auth::routes();

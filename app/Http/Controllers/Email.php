@@ -9,7 +9,7 @@ class Email extends Controller
 {
     public function index(){
 
-        $data = ['name'=>'MuhammadDanish', 'detail'=> 'Hello Danish'];
+        $data = ['name'=>'Muhammad Danish', 'detail'=> 'Thanks For Submitting the Comment!'];
        Mail::send('email', $data, function ($message){
         //    $message->from('john@johndoe.com', 'John Doe');
         //    $message->sender('john@johndoe.com', 'John Doe');
@@ -17,7 +17,7 @@ class Email extends Controller
         //    $message->cc('john@johndoe.com', 'John Doe');
         //    $message->bcc('john@johndoe.com', 'John Doe');
         //    $message->replyTo('john@johndoe.com', 'John Doe');
-           $message->subject('First Email as Subject');
+           $message->subject('Comment Submit Subject!');
         //    $message->priority(3);
         //    $message->attach('pathToFile');
        });

@@ -11,7 +11,18 @@ class Comment extends Model
 
     protected $fillable = ['user_id', 'content'];
 
+    // Some field not display in JSON
+    protected $hidden = ['blog_post_id'];
+
+
     public function blogPost(){
         return $this->belongsTo(BlogPost::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+
+

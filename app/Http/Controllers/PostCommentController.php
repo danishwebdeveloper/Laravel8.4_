@@ -20,9 +20,11 @@ class PostCommentController extends Controller
         $this->middleware('auth')->only(['store']);
     }
 
-    public function index()
+    public function index(BlogPost $post)
     {
-        //
+        // Automatically converted into array and JSON
+        // return $post->comment;
+        return $post->comment()->with('user')->get();
     }
 
     /**

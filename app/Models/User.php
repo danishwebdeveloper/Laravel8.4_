@@ -46,7 +46,12 @@ class User extends Authenticatable
         return $this->hasMany(BlogPost::class);
     }
 
-    
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
     // For Most counted Person that comments & Posts (User fetch with blogposts function(relation) with BlogPosts)
     // Alos use TINKER to verify about the fucntion WithMostBlogPosts, User::WithMostBlogPosts()->take(5)->get();
     public function scopeWithMostBlogPosts(Builder $query){
