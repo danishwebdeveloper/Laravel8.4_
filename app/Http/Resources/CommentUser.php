@@ -20,7 +20,7 @@ class CommentUser extends JsonResource
             'name' => $this->name,
             // Conditional Display the result of API
             // 'email' => $this->when(Auth::user($this->is_admin), $this->email),
-            'email' => $this->when(true, $this->email),
+            'email' => $this->when(false, $this->email),
         ];
     }
 }
