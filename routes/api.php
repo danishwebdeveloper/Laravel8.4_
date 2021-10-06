@@ -34,3 +34,10 @@ Route::prefix('v2')->group(function(){
         return response()->json(['status' => true]);
     });
 });
+
+// For API routes of fallback, if not get existing route/ invalid route call, after that go to handler file
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Not Found'
+    ], 404);
+})->name('api.fallback');

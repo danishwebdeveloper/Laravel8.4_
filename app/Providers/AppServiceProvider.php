@@ -14,6 +14,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    // Registered Policies
+    protected $policies = [
+        'App\Comment' => 'App\Policies\CommentPolicy'
+    ];
     public function register()
     {
         //
