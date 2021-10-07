@@ -65,7 +65,9 @@ class PostCommentController extends Controller
      */
     public function update(BlogPost $post, Comment $comment, StoreComment $request)
     {
+        // Before authorization, we must make policies and declare them too
         $this->authorize($comment);
+
         $comment->content = $request->input('content');
         $comment->save();
         return new CommentUserResource($comment);
