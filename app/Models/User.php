@@ -64,5 +64,4 @@ class User extends Authenticatable
             $query->whereBetween('created_at', [now()->subMonths(1), now()]);
         }])->has('blogposts', '>=', 2)->orderBy('blogposts_count', 'DESC');
     }
-
 }

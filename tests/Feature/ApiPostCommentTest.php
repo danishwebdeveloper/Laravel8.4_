@@ -100,4 +100,25 @@ class ApiPostCommentTest extends TestCase
                 ]
             ]);
     }
+
+    // public function testingg(){
+    //     $element = [
+    //         "Nmae" => "Muhammad Danish",
+    //         "Class" => "Masters informatics",
+    //     ];
+    //     foreach($element as $key => $elements){
+    //        echo $key . " : " . $elements;
+    //        echo "</br>";
+    //     }
+    // }
+
+    // public function arraycheck(){
+    //     $arraysimple = [
+    //         'Danish', 'junaid', 'Billaa'
+    //     ];
+    //     foreach($arraysimple as $arr){
+    //         echo $arr;
+    //         echo "</br>";
+    //     }
+    // }
 }

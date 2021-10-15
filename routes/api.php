@@ -27,7 +27,10 @@ Route::prefix('v1')->name('api.v1.')->namespace('API\V1')->group(function(){
     // Route::apiResource('posts.comments', 'ControllersPostCommentController');
 
 });
+
+
 Route::apiResource('posts.comments', PostCommentController::class)->names('Api\Resource');
+
 
 Route::prefix('v2')->group(function(){
     Route::get('/status', function () {

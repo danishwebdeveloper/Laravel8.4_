@@ -5,17 +5,17 @@ use Tests\TestCase;
 
 class HomeTest extends TestCase
 {
-    
+
     // For home testing alwasys start with test_
     public function test_Home()
     {
         $response = $this->get('/');
-        $response->assertSeeText('HELLO');
+        $response->assertSeeText('Display BlogPost');
     }
 
     // test case always start with test
     public function test_forContact(){
        $contactresponse = $this->get('/contact');
-       $contactresponse->assertSeeText('Page'); 
+       $contactresponse->assertSeeText('Page');
     }
 }

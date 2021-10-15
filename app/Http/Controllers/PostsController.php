@@ -6,6 +6,7 @@ use App\Http\Requests\Storepost;
 use App\Models\BlogPost;
 use App\Models\Images;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PostsController extends Controller
         $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy']);
     }
 
-    public function index()
+    public function index(Builder $query)
     {
         // Query Builder using with we can access all but they have comment will access in one array[]
         // DB::enableQueryLog();
@@ -40,8 +41,10 @@ class PostsController extends Controller
         // }
         // dd(DB::getQueryLog());
 
+
         return view('Posts.index',
         [
+            // Do Elequent Builder Query in model and do all Queries there and call it's funciton and pass value to the relevant view('')
             'posts'=> BlogPost::withCount('comment')->get()->sortDesc(),
             'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
             'mostActiveUser' => User::WithMostBlogPosts()->take(5)->get(),
@@ -61,10 +64,11 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
+    // For store make php artisan make:reqest Storepost and then make validation over there
     public function store(Storepost $request)
     {
         // Storepost created inside the requests
-        // Plus we also post-title and post->content into the BlogPost Model
+        // Plus we also post-title and post->content into the BlogPost Model as fillable
         $validated = $request->validated();
 
         // If Shows error of not user_id then use it as User()->current user

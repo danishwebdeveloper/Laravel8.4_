@@ -4,6 +4,14 @@
 
 @section('content')
     <h1>
-        HELLO INDEX PAGE
+        Display BlogPost With Name and Content
+
     </h1>
+    @foreach ($post as $posts)
+       <b> Post Title:</b> {{ $posts->title }}
+       <br/>
+       <b> Post Content:</b>{{ $posts->content }}
+        <br/>
+        <br/>
+    @endforeach
 @endsection

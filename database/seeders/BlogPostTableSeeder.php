@@ -16,8 +16,9 @@ class BlogPostTableSeeder extends Seeder
     {
         // using make and each becasue of foreign key and didnt enter foreign column
         //Put dynamic data using seeding
+        $blogCount = (int)$this->command->ask('How many blog posts would you like?', 50);
         $users = \App\Models\User::all();
-        \App\Models\BlogPost::factory(20)->make()->each(function($post) use($users){
+        \App\Models\BlogPost::factory($blogCount)->make()->each(function($post) use($users){
             $post->user_id = $users->random()->id;
             $post->save();
         });
